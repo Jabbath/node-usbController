@@ -5,10 +5,8 @@ function usbController(pid,vid,config){
 	var eventTriggers = [];
 	var previousValue;
 	
-	var reduceToConfVals = function(data,position){
+	var reduceToConfVals = function(data,position){//Consider running this earlier so pressing two buttons at once does not retrigger
 		var keys = [];
-		
-		//TODO: we have to find the greatest possible value each time
 		
 		while(data !== 0){
 			var greatest = [0,'key'];
@@ -16,13 +14,15 @@ function usbController(pid,vid,config){
 			for(var prop in config){
 				var curKey = config[prop]; 
 				
+				//We have to find the greatest button value that can fit into the data
+				
 				if(curKey.type === 'button' && curKey.pos === position && curKey.val <= data && curKey.val>greatest[0]){
 					greatest[0] = curKey.val;
 					greatest[1] = prop;
 				}
 			}
 			keys.push(greatest[1]);
-			data-= greatest[0];
+			data-= greatest[0]; //We subtract this value from the data so we can find the second greatest value that will fit
 			//console.log(greatest);
 		}
 		
@@ -40,7 +40,7 @@ function usbController(pid,vid,config){
 			//console.log(buttonVals);
 			
 			for(var i=0;i<buttonVals.length;i++){
-				if(buttonVals[i] === trigger){
+				if(buttonVals[i] === trigger && ){
 					eventTrigger.callback(data);
 				}
 			}
