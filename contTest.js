@@ -40,7 +40,7 @@ function usbController(pid,vid,config){
 			//console.log(buttonVals);
 			
 			for(var i=0;i<buttonVals.length;i++){
-				if(buttonVals[i] === trigger && ){
+				if(buttonVals[i] === trigger){
 					eventTrigger.callback(data);
 				}
 			}
