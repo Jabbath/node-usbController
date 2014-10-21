@@ -16,15 +16,14 @@ function usbController(pid,vid,config){
 			for(var prop in config){
 				var curKey = config[prop]; 
 				
-				if(curKey.type === 'button' && curKey.pos === position && curKey.val <= data && curKey>greatest[0]){
+				if(curKey.type === 'button' && curKey.pos === position && curKey.val <= data && curKey.val>greatest[0]){
 					greatest[0] = curKey.val;
 					greatest[1] = prop;
-					keys.push(prop);
-					data-= curKey.val;
 				}
 			}
 			keys.push(greatest[1]);
 			data-= greatest[0];
+			//console.log(greatest);
 		}
 		
 		return keys;
@@ -38,7 +37,7 @@ function usbController(pid,vid,config){
 		
 		if(type === 'button'){
 			var buttonVals = reduceToConfVals(data,position); //When multiple button are pressed we have to separate their values
-			console.log(buttonVals);
+			//console.log(buttonVals);
 			
 			for(var i=0;i<buttonVals.length;i++){
 				if(buttonVals[i] === trigger){
