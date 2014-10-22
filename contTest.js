@@ -5,7 +5,7 @@ function usbController(pid,vid,config){
 	var eventTriggers = [];
 	var previousValue;
 	
-	var reduceToConfVals = function(data,position){//Consider running this earlier so pressing two buttons at once does not retrigger
+	var reduceToConfVals = function(data,position){
 		var keys = [];
 		
 		while(data !== 0){
@@ -30,17 +30,33 @@ function usbController(pid,vid,config){
 	}
 	
 	var eventHandler = function(data,eventTrigger){
+		//console.log('eventHandler',eventTrigger);
 		var trigger = eventTrigger.eventTrigger;
-		//console.log('triggered',trigger);
 		var position = config[trigger].pos;
 		var type = config[trigger].type;
 		
 		if(type === 'button'){
 			var buttonVals = reduceToConfVals(data,position); //When multiple button are pressed we have to separate their values
-			//console.log(buttonVals);
+			var previousButtonVals = reduceToConfVals(previousValue[position],position);
+			//console.log(previousVals,'previousValue');
 			
 			for(var i=0;i<buttonVals.length;i++){
-				if(buttonVals[i] === trigger){
+				var pressedLast = false;
+				
+				/*We need to check if the button was already pressed last
+				time around so the callback does not refire if a second button
+				is pressed before the first is release*/
+				
+				
+				for(var l=0;l<previousButtonVals.length;l++){ 
+					//console.log(previousVals,trigger);
+					if(previousButtonVals[l]===trigger){
+						pressedLast = true;
+						//console.log(pressedLast);
+					}
+				}
+				
+				if(buttonVals[i] === trigger && !pressedLast){
 					eventTrigger.callback(data);
 				}
 			}
@@ -61,9 +77,9 @@ function usbController(pid,vid,config){
 				var position = config[eventTrigger].pos;
 				var callback = eventTriggers[i].callback;
 			
-				//if(config[eventTrigger].hasOwnProperty('defaultVal')){//Some inputs are not at 0 by default (perhaps not needed) try only checking for change
 				if(data[position] !== previousValue[position]){//currently only checking for change
-					eventHandler(data[position],eventTriggers[i]);
+					//console.log(data[position]);
+					eventHandler(data[position],eventTriggers[i]); //This is actually fired multiple times if multiple buttons share the same position
 				}
 			}
 		}
