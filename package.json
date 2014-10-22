@@ -1,5 +1,5 @@
 {
-  "name": "node-usbController",
+  "name": "node-usbcontroller",
   "version": "0.1.1",
   "description": "This module aims to allow you to interface with any usb controller, needing only a simple config file.",
   "main": "main.js",
