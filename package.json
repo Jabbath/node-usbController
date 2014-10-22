@@ -1,0 +1,31 @@
+{
+  "name": "node-usbController",
+  "version": "0.1.1",
+  "description": "This module aims to allow you to interface with any usb controller, needing only a simple config file.",
+  "main": "main.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "node-hid": "^0.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jabbath/node-usbController.git"
+  },
+  "keywords": [
+    "usb",
+    "controller",
+    "universal"
+  ],
+  "author": "Anton Afanassiev <AntonAf@outlook.com> (https://github.com/Jabbath)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jabbath/node-usbController/issues"
+  },
+  "homepage": "https://github.com/Jabbath/node-usbController"
+}

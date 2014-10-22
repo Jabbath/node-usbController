@@ -1,0 +1,16 @@
+{
+"y-axis":{"type": "axis","pos": 1},
+"x-axis":{"type": "axis","pos": 0},
+"lever":{"type": "axis","pos": 2},
+"trigger": {"type": "button","pos": 3,"val": 1},
+"button2": {"type": "button","pos": 3,"val": 2},
+"button3": {"type": "button","pos": 3,"val": 4},
+"button4": {"type": "button","pos": 3,"val": 8},
+"button5": {"type": "button","pos": 3,"val": 16},
+"button6": {"type": "button","pos": 3,"val": 32},
+"button7": {"type": "button","pos": 3,"val": 64},
+"button8": {"type": "button","pos": 3,"val": 128},
+"button9": {"type": "button","pos": 4,"val": 1},
+"button10": {"type": "button","pos": 4,"val": 2},
+"button11": {"type": "button","pos": 4,"val": 4}
+}
