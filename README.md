@@ -1,39 +1,51 @@
 node-usbController
 ==================
 
-This module aims to allow you to interface with any usb controller, needing only a simple config file.
+This module aims to allow you to interface with any usb gamepad/controller, needing only a simple config file.
 
 ##Usage
 
 To use this module you will first need to make a JSON config file for your controller. 
-There are two types of inputs you need to consider, buttons and those that move on a axis (joysticks).
+There are two types of inputs you need to consider, buttons and joysticks (anything that gives off a range of values).
 
-<pre><code>{
+```javascript
+//Example config
+{
 "axis":{"type": "axis","pos": 1},
 "button": {"type": "button","pos": 3,"val": 2}
 }
-</code></pre>
+```
 
 To get the data for this config file you will have to use node-hid like so:
 
-<pre><code>var HID = require('node-hid');
-console.log(HID.devices()); //locate your device by pid and vid
-var device = HID.HID(pid,vid);
-device.on("data",function(data){console.log(data.toJSON());});
-</code></pre>
+```javascript
+var HID = require('node-hid');
+console.log(HID.devices()); //locate your device by pid (productId) and vid (vendorId)
+```
 
-Then, simply note the array position of each input and in the case of buttons, their value when pressed (in base 10).
+Then:
+
+```javascript
+var device = new HID.HID(pid,vid);
+device.on("data",function(data){console.log(data);});
+```
+
+Then, simply note the array position of each input and use that value to populate the input's "pos" property.
+Buttons will require you to note the value it emits (in base 10).
 
 Next, you can use the module via:
 
-<pre><code>var controller = require('node-usbController');
-var con = require('./config.json');
+```javascript
+var controller = require('node-usbController');
+var config = require('./config.json');
+var pid = 5000;//Some number as reported by node-hid or lsusb representing product id
+var vid = 6000;
 
-var x = new controller(pid,vid,con);
+var x = new controller(pid,vid,config);
 
 x.on('button2',function(data){console.log(data,'button2');});
 x.on('y-axis',function(data){console.log(data,'y-axis');});
-</code></pre>
+```
 
 ##Contributing
 

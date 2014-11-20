@@ -1,6 +1,6 @@
 {
   "name": "node-usbcontroller",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "This module aims to allow you to interface with any usb controller, needing only a simple config file.",
   "main": "main.js",
   "directories": {
@@ -20,7 +20,7 @@
   "keywords": [
     "usb",
     "controller",
-    "universal"
+    "gamepad"
   ],
   "author": "Anton Afanassiev <AntonAf@outlook.com> (https://github.com/Jabbath)",
   "license": "MIT",
