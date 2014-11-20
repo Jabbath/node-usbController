@@ -6,7 +6,7 @@ This module aims to allow you to interface with any usb gamepad/controller, need
 ##Usage
 
 To use this module you will first need to make a JSON config file for your controller. 
-There are two types of inputs you need to consider, buttons and joysticks (anything that gives off a range of values).
+There are two types of inputs you need to consider, buttons and joysticks (anything that moves on an axis).
 
 ```javascript
 //Example config
@@ -43,8 +43,13 @@ var vid = 6000;
 
 var x = new controller(pid,vid,config);
 
-x.on('button2',function(data){console.log(data,'button2');});
-x.on('y-axis',function(data){console.log(data,'y-axis');});
+x.on('button2',function(data){
+	console.log(data,'button2');
+});
+
+x.on('y-axis',function(data){
+	console.log(data,'y-axis');
+});
 ```
 
 ##Contributing
