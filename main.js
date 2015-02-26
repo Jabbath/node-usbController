@@ -2,18 +2,18 @@ var HID = require('node-hid');
 
 function usbController(pid,vid,config){
 	var controller = new HID.HID(pid,vid);
-	var eventTriggers = [];
-	var previousValue;
+	var eventTriggers = []; //These are the x.on('whatever',function)
+	var previousValue; //The set of values from the last time the data event fired
 		
-	var eventHandler = function(data,eventTrigger){
+	var eventHandler = function(data,eventTrigger){//Handles the detected inputs once we've found them
 		//console.log('eventHandler',eventTrigger);
 		var trigger = eventTrigger.eventTrigger;
 		var position = config[trigger].pos;
 		var type = config[trigger].type;
 		
 		if(type === 'button'){
-			var currentVal = data[position] & config.trigger.val; //When multiple button are pressed we have to separate their values
-			var previousVal = previousValue[position] & config.trigger.val;
+			var currentVal = data[position] & config[trigger].val; //When multiple button are pressed we have to separate their values
+			var previousVal = previousValue[position] & config[trigger].val;
 			//console.log(previousVals,'previousValue');
 			
 			if(currentVal && !previousVal){
